@@ -12,23 +12,23 @@ import ObjectMapper
 
 class ApiService: RxMoyaProvider<Service> {
     
-    init(plugins: [PluginType] = []) {
-        
-        // SSL Pinning
+    static let instance: ApiService = ApiService()
+    
+    init() {
         let serverTrustPolicies: [String: ServerTrustPolicy] = [
-            Service.getBaseUrl(): .pinCertificates(
+            "": .pinCertificates(
                 certificates: ServerTrustPolicy.certificates(),
                 validateCertificateChain: true,
                 validateHost: true
             )
         ]
+        
         let manager = Manager(
             serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies)
         )
         
-        super.init(manager: manager, plugins: plugins)
+        super.init(manager: manager, plugins: [NetworkLoggerPlugin()])
     }
-    
 }
 
 enum Service {
@@ -39,12 +39,9 @@ enum Service {
 
 extension Service: TargetType {
     
-    static func getAuthHeader() -> String {
-        return "x-authorization"
-    }
-    
     static func getBaseUrl() -> String {
-        let urlString = "http://128.199.217.76:5000/pronto-py/api/"
+        //128.199.217.76
+        let urlString = "http://128.199.217.76/py/pronto-py/api/"
         return urlString
     }
     

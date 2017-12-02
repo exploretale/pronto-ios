@@ -9,9 +9,10 @@
 import UIKit
 import SpriteKit
 import ARKit
+import RxSwift
 
 enum ARViewType {
-    case waitingForUserTap, waitingForResults(identifier: String), failedToGetResuls, resultDisplayed
+    case waitingForUserTap, waitingForResults(identifier: String), failedToGetResults, resultDisplayed
 }
 
 class ViewController: UIViewController, ARSKViewDelegate, SceneDelegate {
@@ -37,17 +38,23 @@ class ViewController: UIViewController, ARSKViewDelegate, SceneDelegate {
     @IBOutlet weak var nutritionFactsLabel: UILabel!
     
     @IBAction func didTapRecognize(_ sender: Any) {
-        arViewType = .resultDisplayed // temp
+        if let scene = sceneView.scene as? Scene {
+            scene.findObject()
+        }
     }
     
     @IBAction func didTapReset(_ sender: Any) {
+        self.food = nil
         arViewType = .waitingForUserTap
         if let scene = sceneView.scene as? Scene {
             scene.removeAnchor()
         }
     }
     
+    var repository: Repository! = Repository.instance
     var food: Food?
+    
+    let disposeBag = DisposeBag()
     
     var arViewType: ARViewType = ARViewType.waitingForUserTap {
         didSet {
@@ -67,7 +74,7 @@ class ViewController: UIViewController, ARSKViewDelegate, SceneDelegate {
                 self.activityIndicator.startAnimating()
                 self.hideInstructions()
                 self.hideBuy()
-            case .failedToGetResuls:
+            case .failedToGetResults:
                 let alert = UIAlertController(title: "Error", message: "Failed to get results", preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(action)
@@ -167,8 +174,17 @@ class ViewController: UIViewController, ARSKViewDelegate, SceneDelegate {
         }
     }
     
-    func getCaptionNode(title: String, description: String) -> SKNode {
-        foodLabel.text = "Mom's Spaghetttiiii"
+    func getCaptionNode(food: Food) -> SKNode {
+        foodLabel.text = food.name
+        var nutrients = ""
+        for nutrient in food.nutrients {
+            if !nutrients.isEmpty {
+                nutrients += "\n"
+            }
+            nutrients += "\(nutrient.label!) \(nutrient.quantity!)\(nutrient.unit!)"
+        }
+        nutritionFactsLabel.text = nutrients
+        productDetailsView.layoutIfNeeded()
         let texture = SKTexture(image: getImage(view: productDetailsView))
         return SKSpriteNode(texture: texture)
     }
@@ -197,7 +213,7 @@ class ViewController: UIViewController, ARSKViewDelegate, SceneDelegate {
         }
         
         // Create and configure a node for the anchor added to the view's session.
-        return getCaptionNode(title: "Hello", description: "hot dogs\ncold beer\nteam jerseys")
+        return getCaptionNode(food: food)
     }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
@@ -217,8 +233,19 @@ class ViewController: UIViewController, ARSKViewDelegate, SceneDelegate {
     
     // MARK: SceneDelegate
     
+    func didFailToFindObject() {
+        arViewType = .failedToGetResults
+    }
+    
     func didDetectObject(identifier: String) {
         arViewType = .waitingForResults(identifier: identifier)
+        let param = FoodParam(food: identifier)
+        repository.search(param: param).subscribe(onNext: { food in
+            self.food = food
+            self.arViewType = .resultDisplayed
+        }, onError: { error in
+            self.arViewType = .failedToGetResults
+        }).addDisposableTo(disposeBag)
     }
     
 }

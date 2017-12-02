@@ -8,8 +8,8 @@ target 'Pronto' do
   # Pods for Pronto
   
   # Pods for Networking
-  pod 'Moya/RxSwift', '~> 8.0.3'
-  pod 'Moya-ObjectMapper/RxSwift', '~> 2.3.1'
+  pod 'Moya/RxSwift', '~> 8.0'
+  pod 'Moya-ObjectMapper/RxSwift', '~> 2.3'
   
   # UI
   pod 'Kingfisher', '~> 3.0'

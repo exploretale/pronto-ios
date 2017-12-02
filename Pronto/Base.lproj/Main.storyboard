@@ -197,13 +197,18 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="0.75" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Zgv-2e-VfD" firstAttribute="top" secondItem="fPT-uY-rb5" secondAttribute="top" id="4eW-He-rss"/>
                                     <constraint firstAttribute="trailing" secondItem="Zgv-2e-VfD" secondAttribute="trailing" id="Zow-MM-2NV"/>
                                     <constraint firstAttribute="bottom" secondItem="Zgv-2e-VfD" secondAttribute="bottom" id="bFx-6P-eJA"/>
                                     <constraint firstItem="Zgv-2e-VfD" firstAttribute="leading" secondItem="fPT-uY-rb5" secondAttribute="leading" id="eY9-I8-yY2"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

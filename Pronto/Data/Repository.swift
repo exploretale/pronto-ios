@@ -12,10 +12,12 @@ import Moya_ObjectMapper
 
 class Repository {
     
+    static let instance: Repository = Repository()
+    
     private let service: ApiService!
     
-    init(service: ApiService = ApiService(plugins: [])) {
-        self.service = service
+    init() {
+        self.service = ApiService.instance
     }
     
     func search(param: FoodParam) -> Observable<Food> {
