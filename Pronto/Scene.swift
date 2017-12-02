@@ -11,6 +11,8 @@ import ARKit
 
 class Scene: SKScene {
     
+    private var currentAnchor: ARAnchor?
+    
     override func didMove(to view: SKView) {
         // Setup your scene here
     }
@@ -34,9 +36,25 @@ class Scene: SKScene {
             translation.columns.3.z = -2    // distance in front of cam, negative mas malayo
             let transform = simd_mul(currentFrame.camera.transform, translation)
             
+            // remove current anchor
+            removeAnchor()
+            
             // Add a new anchor to the session
             let anchor = ARAnchor(transform: transform)
+            self.currentAnchor = anchor
+            
             sceneView.session.add(anchor: anchor)
         }
     }
+    
+    func removeAnchor() {
+        guard let sceneView = self.view as? ARSKView else {
+            return
+        }
+        
+        if let a = self.currentAnchor {
+            sceneView.session.remove(anchor: a)
+        }
+    }
+    
 }

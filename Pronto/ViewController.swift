@@ -38,6 +38,9 @@ class ViewController: UIViewController, ARSKViewDelegate {
     
     @IBAction func didTapReset(_ sender: Any) {
         arViewType = .waitingForUserTap
+        if let scene = sceneView.scene as? Scene {
+            scene.removeAnchor()
+        }
     }
     
     var arViewType: ARViewType = ARViewType.waitingForUserTap {
@@ -158,7 +161,6 @@ class ViewController: UIViewController, ARSKViewDelegate {
     func getCaptionNode(title: String, description: String) -> SKNode {
         let labelBoxNode = SKSpriteNode(color: .darkGray, size: CGSize(width: 200, height: 200))
         labelBoxNode.position = CGPoint(x: 0, y: 0)
-        
         
         let singleLineMessage = SKLabelNode()
         singleLineMessage.fontSize = min(labelBoxNode.size.width, labelBoxNode.size.height) /
