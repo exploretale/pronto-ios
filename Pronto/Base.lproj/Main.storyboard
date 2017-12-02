@@ -22,6 +22,23 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IQX-in-KCp">
+                                <rect key="frame" x="287" y="36" width="72" height="30"/>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="72" id="2Bg-XU-c3S"/>
+                                </constraints>
+                                <state key="normal" title="RESET"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="didTapReset:" destination="BV1-FR-VrT" eventType="touchUpInside" id="dc8-eD-bLh"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s6H-3P-tWW" userLabel="Marker View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
@@ -47,6 +64,9 @@
                                             <action selector="didTapRecognize:" destination="BV1-FR-VrT" eventType="touchUpInside" id="kr7-KP-LWC"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Dhr-5Q-8ym">
+                                        <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -54,11 +74,13 @@
                                     <constraint firstItem="07u-h8-G0d" firstAttribute="bottom" secondItem="pfF-Ea-nNv" secondAttribute="bottom" id="B9l-ls-xk2"/>
                                     <constraint firstItem="pfF-Ea-nNv" firstAttribute="centerX" secondItem="s6H-3P-tWW" secondAttribute="centerX" id="D0Q-DY-Lez"/>
                                     <constraint firstItem="07u-h8-G0d" firstAttribute="leading" secondItem="pfF-Ea-nNv" secondAttribute="leading" id="Y0n-m6-lse"/>
+                                    <constraint firstItem="Dhr-5Q-8ym" firstAttribute="centerX" secondItem="s6H-3P-tWW" secondAttribute="centerX" id="b1O-WH-cgN"/>
                                     <constraint firstItem="07u-h8-G0d" firstAttribute="trailing" secondItem="pfF-Ea-nNv" secondAttribute="trailing" id="bFE-Jz-2oR"/>
                                     <constraint firstItem="pfF-Ea-nNv" firstAttribute="centerY" secondItem="s6H-3P-tWW" secondAttribute="centerY" constant="-56" id="i98-fz-4Kk"/>
+                                    <constraint firstItem="Dhr-5Q-8ym" firstAttribute="centerY" secondItem="s6H-3P-tWW" secondAttribute="centerY" id="ol3-2V-yop"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ii5-Ag-yzT" userLabel="Buy View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ii5-Ag-yzT" userLabel="Buy View">
                                 <rect key="frame" x="0.0" y="539" width="375" height="128"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9zo-KZ-AfY">
@@ -115,6 +137,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="hdq-do-2nR" firstAttribute="trailing" secondItem="IQX-in-KCp" secondAttribute="trailing" constant="16" id="2i5-28-GG4"/>
                             <constraint firstItem="s6H-3P-tWW" firstAttribute="leading" secondItem="eLb-uh-MIJ" secondAttribute="leading" id="559-S8-COF"/>
                             <constraint firstItem="wlR-PD-nhe" firstAttribute="leading" secondItem="eLb-uh-MIJ" secondAttribute="leading" id="793-8J-AsM"/>
                             <constraint firstAttribute="trailing" secondItem="s6H-3P-tWW" secondAttribute="trailing" id="9pV-Xj-eEH"/>
@@ -124,6 +147,7 @@
                             <constraint firstAttribute="bottom" secondItem="wlR-PD-nhe" secondAttribute="bottom" id="O49-P4-850"/>
                             <constraint firstItem="sgm-Ta-bEi" firstAttribute="leading" secondItem="eLb-uh-MIJ" secondAttribute="leading" id="WTu-eQ-SY4"/>
                             <constraint firstAttribute="bottom" secondItem="s6H-3P-tWW" secondAttribute="bottom" id="cOY-HA-TEl"/>
+                            <constraint firstItem="IQX-in-KCp" firstAttribute="top" secondItem="hdq-do-2nR" secondAttribute="top" constant="16" id="jdz-cu-13S"/>
                             <constraint firstItem="ii5-Ag-yzT" firstAttribute="leading" secondItem="eLb-uh-MIJ" secondAttribute="leading" id="n7y-l5-uSC"/>
                             <constraint firstAttribute="bottom" secondItem="sgm-Ta-bEi" secondAttribute="bottom" id="tYQ-Uj-fXi"/>
                             <constraint firstAttribute="trailing" secondItem="wlR-PD-nhe" secondAttribute="trailing" id="u7c-nT-wif"/>
@@ -133,13 +157,17 @@
                         <viewLayoutGuide key="safeArea" id="hdq-do-2nR"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="Dhr-5Q-8ym" id="zDw-56-Z8z"/>
+                        <outlet property="boxView" destination="pfF-Ea-nNv" id="xv5-w1-fFL"/>
                         <outlet property="buyCollectionView" destination="9zo-KZ-AfY" id="ABD-2g-fgE"/>
                         <outlet property="buyView" destination="ii5-Ag-yzT" id="6dS-8b-n4u"/>
                         <outlet property="buyViewBottomConstraint" destination="uMv-Ab-eNS" id="sLh-zV-V34"/>
+                        <outlet property="buyViewHeightConstraint" destination="M6Y-yd-Dlx" id="9BQ-9U-vVd"/>
                         <outlet property="instructionsLabel" destination="pUw-aM-FkI" id="W0q-M1-aSj"/>
                         <outlet property="instructionsView" destination="wlR-PD-nhe" id="9Hx-Cr-eam"/>
                         <outlet property="instructionsViewBottomConstraint" destination="O49-P4-850" id="pd2-Cx-dRy"/>
-                        <outlet property="markerView" destination="s6H-3P-tWW" id="7dH-7L-9Gg"/>
+                        <outlet property="markerView" destination="s6H-3P-tWW" id="ezF-Z3-2jP"/>
+                        <outlet property="resetButton" destination="IQX-in-KCp" id="yqg-Ee-L5o"/>
                         <outlet property="sceneView" destination="sgm-Ta-bEi" id="Qdk-Gd-C7h"/>
                     </connections>
                 </viewController>

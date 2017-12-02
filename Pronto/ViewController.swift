@@ -10,14 +10,22 @@ import UIKit
 import SpriteKit
 import ARKit
 
+enum ARViewType {
+    case waitingForUserTap, waitingForResults, failedToGetResuls, resultDisplayed
+}
+
 class ViewController: UIViewController, ARSKViewDelegate {
     
     @IBOutlet var sceneView: ARSKView!
     
+    @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var markerView: UIView!
+    @IBOutlet weak var boxView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var buyView: UIView!
     @IBOutlet weak var buyCollectionView: UICollectionView!
+    @IBOutlet weak var buyViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var buyViewBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var instructionsView: UIView!
@@ -25,7 +33,52 @@ class ViewController: UIViewController, ARSKViewDelegate {
     @IBOutlet weak var instructionsViewBottomConstraint: NSLayoutConstraint!
     
     @IBAction func didTapRecognize(_ sender: Any) {
-        
+        arViewType = .resultDisplayed // temp
+    }
+    
+    @IBAction func didTapReset(_ sender: Any) {
+        arViewType = .waitingForUserTap
+    }
+    
+    var arViewType: ARViewType = ARViewType.waitingForUserTap {
+        didSet {
+            switch arViewType {
+            case .waitingForUserTap:
+                self.resetButton.isHidden = true
+                self.markerView.isHidden = false
+                self.boxView.isHidden = false
+                self.activityIndicator.stopAnimating()
+                self.instructionsLabel.text = "Place the object inside the box then tap it"
+                self.showInstructions()
+                self.hideBuy()
+            case .waitingForResults:
+                self.resetButton.isHidden = true
+                self.markerView.isHidden = false
+                self.boxView.isHidden = true
+                self.activityIndicator.startAnimating()
+                self.hideInstructions()
+                self.hideBuy()
+            case .failedToGetResuls:
+                let alert = UIAlertController(title: "Error", message: "Failed to get results", preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+                self.resetButton.isHidden = true
+                self.markerView.isHidden = false
+                self.boxView.isHidden = false
+                self.activityIndicator.stopAnimating()
+                self.instructionsLabel.text = "Place the object inside the box then tap it"
+                self.showInstructions()
+                self.hideBuy()
+            case .resultDisplayed:
+                self.resetButton.isHidden = false
+                self.markerView.isHidden = true
+                self.boxView.isHidden = true
+                self.activityIndicator.startAnimating()
+                self.hideInstructions()
+                self.showBuy()
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -42,6 +95,8 @@ class ViewController: UIViewController, ARSKViewDelegate {
         if let scene = SKScene(fileNamed: "Scene") {
             sceneView.presentScene(scene)
         }
+        
+        self.arViewType = .waitingForUserTap
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +119,40 @@ class ViewController: UIViewController, ARSKViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
+    }
+    
+    // MARK: - Helper methods
+    
+    func showBuy() {
+        self.buyViewBottomConstraint.constant = 0
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+        }) { _ in
+        }
+    }
+    
+    func hideBuy() {
+        self.buyViewBottomConstraint.constant = -self.buyViewHeightConstraint.constant
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+        }) { _ in
+        }
+    }
+    
+    func showInstructions() {
+        self.instructionsViewBottomConstraint.constant = 0
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+        }) { _ in
+        }
+    }
+    
+    func hideInstructions() {
+        self.instructionsViewBottomConstraint.constant = -self.instructionsView.frame.height
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+        }) { _ in
+        }
     }
     
     // MARK: - ARSKViewDelegate
