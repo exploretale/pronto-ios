@@ -207,6 +207,13 @@ class ViewController: UIViewController, ARSKViewDelegate, SceneDelegate, UIColle
         return image!
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "details", let vc = segue.destination as? MerchantViewController,
+            let restaurant = sender as? Restaurant {
+            vc.restaurant = restaurant
+        }
+    }
+    
     // MARK: - ARSKViewDelegate
     
     func view(_ view: ARSKView, nodeFor anchor: ARAnchor) -> SKNode? {
@@ -314,7 +321,7 @@ class ViewController: UIViewController, ARSKViewDelegate, SceneDelegate, UIColle
                 UIApplication.shared.open(link)
             }
         } else {
-            // open another page
+            performSegue(withIdentifier: "details", sender: restaurant)
         }
     }
     

@@ -55,6 +55,7 @@ class Restaurant: Mappable {
     var url: String!
     var isProntoMerchant: Bool!
     var products: [Product]!
+    var rating: Int?
     
     required init?(map: Map) {
     }
@@ -67,6 +68,7 @@ class Restaurant: Mappable {
         url <- map["url"]
         isProntoMerchant <- map["is_pronto_merchant"]
         products <- map["products"]
+        rating <- map["rating"]
     }
     
 }
@@ -74,7 +76,7 @@ class Restaurant: Mappable {
 class Review: Mappable {
     
     var body: String!
-    var rating: Double!
+    var rating: Int?
     var title: String!
     
     required init?(map: Map) {
@@ -95,6 +97,7 @@ class Product: Mappable {
     var name: String!
     var price: String!
     var sku: String!
+    var image: String?
     
     required init?(map: Map) {
     }
@@ -105,6 +108,7 @@ class Product: Mappable {
         name <- map["name"]
         price <- map["price"]
         sku <- map["sku"]
+        image <- map["image"]
     }
     
 }

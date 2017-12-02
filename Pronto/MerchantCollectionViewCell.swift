@@ -20,7 +20,17 @@ class MerchantCollectionViewCell: UICollectionViewCell {
     func set(restaurant: Restaurant) {
         nameLabel.text = restaurant.name
         addressLabel.text = restaurant.address
-        ratingLabel.text = "⭐️⭐️⭐️⭐️⭐️"
+        var star = ""
+        if let rating = restaurant.rating {
+            for _ in 1...rating {
+                star += "⭐️"
+            }
+            ratingLabel.text = star
+        } else {
+            ratingLabel.text = ""
+        }
+        ratingLabel.text = star
+        ratingLabel.text = star
         let url = URL(string: restaurant.image)
         merchantImageView.kf.setImage(with: url)
         ubpImageView.isHidden = !restaurant.isProntoMerchant
