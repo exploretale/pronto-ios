@@ -156,13 +156,21 @@ class ViewController: UIViewController, ARSKViewDelegate {
     }
     
     func getCaptionNode(title: String, description: String) -> SKNode {
-        let labelNode = SKLabelNode(text: "Pizza is the best")
-        labelNode.horizontalAlignmentMode = .center
-        labelNode.verticalAlignmentMode = .center
-        labelNode.position = CGPoint(x: 0, y: -labelNode.frame.size.height/2)
         let labelBoxNode = SKSpriteNode(color: .darkGray, size: CGSize(width: 200, height: 200))
-        labelBoxNode.position = CGPoint(x: 200, y: 100)
-        labelBoxNode.addChild(labelNode)
+        labelBoxNode.position = CGPoint(x: 0, y: 0)
+        
+        
+        let singleLineMessage = SKLabelNode()
+        singleLineMessage.fontSize = min(labelBoxNode.size.width, labelBoxNode.size.height) /
+            CGFloat(description.components(separatedBy: "\n").count)
+        singleLineMessage.verticalAlignmentMode = .center
+        singleLineMessage.text = description
+        let message = singleLineMessage.multilined()
+        message.position = CGPoint(x: 0, y: 0)
+        message.zPosition = 1001
+        
+        labelBoxNode.addChild(message)
+        
         return labelBoxNode
     }
     
@@ -170,7 +178,7 @@ class ViewController: UIViewController, ARSKViewDelegate {
     
     func view(_ view: ARSKView, nodeFor anchor: ARAnchor) -> SKNode? {
         // Create and configure a node for the anchor added to the view's session.
-        return getCaptionNode(title: "Hello", description: "123")
+        return getCaptionNode(title: "Hello", description: "hot dogs\ncold beer\nteam jerseys")
     }
     
     func session(_ session: ARSession, didFailWithError error: Error) {

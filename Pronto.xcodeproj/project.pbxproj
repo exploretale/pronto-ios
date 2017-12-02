@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5956981CF1318E11A1872260 /* Pods_Pronto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3B63497B87BBE5764468041 /* Pods_Pronto.framework */; };
+		A21150881FD28D7F00185DAA /* SKLabelNode+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21150871FD28D7F00185DAA /* SKLabelNode+.swift */; };
 		A2D96E0C1FD25897000CCF79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D96E0B1FD25897000CCF79 /* AppDelegate.swift */; };
 		A2D96E0E1FD25897000CCF79 /* Scene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2D96E0D1FD25897000CCF79 /* Scene.sks */; };
 		A2D96E101FD25897000CCF79 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D96E0F1FD25897000CCF79 /* Scene.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		2A7F7117C36ED34FC9BCA54D /* Pods-Pronto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pronto.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pronto/Pods-Pronto.debug.xcconfig"; sourceTree = "<group>"; };
 		9397DB1E9EC4C16FD4D4A1A3 /* Pods-Pronto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pronto.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pronto/Pods-Pronto.release.xcconfig"; sourceTree = "<group>"; };
+		A21150871FD28D7F00185DAA /* SKLabelNode+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKLabelNode+.swift"; sourceTree = "<group>"; };
 		A2D96E081FD25897000CCF79 /* Pronto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pronto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2D96E0B1FD25897000CCF79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2D96E0D1FD25897000CCF79 /* Scene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene.sks; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				A2D96E221FD25DAB000CCF79 /* UIView+Designable.swift */,
+				A21150871FD28D7F00185DAA /* SKLabelNode+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2D96E231FD25DAB000CCF79 /* UIView+Designable.swift in Sources */,
+				A21150881FD28D7F00185DAA /* SKLabelNode+.swift in Sources */,
 				A2D96E121FD25897000CCF79 /* ViewController.swift in Sources */,
 				A2D96E101FD25897000CCF79 /* Scene.swift in Sources */,
 				A2D96E0C1FD25897000CCF79 /* AppDelegate.swift in Sources */,
