@@ -15,7 +15,7 @@ enum ARViewType {
     case waitingForUserTap, waitingForResults(identifier: String), failedToGetResults, resultDisplayed
 }
 
-class ViewController: UIViewController, ARSKViewDelegate, SceneDelegate {
+class ViewController: UIViewController, ARSKViewDelegate, SceneDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet var sceneView: ARSKView!
     
@@ -45,6 +45,8 @@ class ViewController: UIViewController, ARSKViewDelegate, SceneDelegate {
     
     @IBAction func didTapReset(_ sender: Any) {
         self.food = nil
+        self.data = nil
+        buyCollectionView.reloadData()
         arViewType = .waitingForUserTap
         if let scene = sceneView.scene as? Scene {
             scene.removeAnchor()
@@ -64,7 +66,7 @@ class ViewController: UIViewController, ARSKViewDelegate, SceneDelegate {
                 self.markerView.isHidden = false
                 self.boxView.isHidden = false
                 self.activityIndicator.stopAnimating()
-                self.instructionsLabel.text = "Place the object inside the box then tap it"
+                self.instructionsLabel.text = "Place the object inside the screen then tap it"
                 self.showInstructions()
                 self.hideBuy()
             case .waitingForResults:
@@ -83,7 +85,7 @@ class ViewController: UIViewController, ARSKViewDelegate, SceneDelegate {
                 self.markerView.isHidden = false
                 self.boxView.isHidden = false
                 self.activityIndicator.stopAnimating()
-                self.instructionsLabel.text = "Place the object inside the box then tap it"
+                self.instructionsLabel.text = "Place the object inside the screen then tap it"
                 self.showInstructions()
                 self.hideBuy()
             case .resultDisplayed:
@@ -104,8 +106,8 @@ class ViewController: UIViewController, ARSKViewDelegate, SceneDelegate {
         sceneView.delegate = self
         
         // Show statistics such as fps and node count
-        sceneView.showsFPS = true
-        sceneView.showsNodeCount = true
+        //sceneView.showsFPS = true
+        //sceneView.showsNodeCount = true
         
         // Load the SKScene from 'Scene.sks'
         if let scene = SKScene(fileNamed: "Scene") {
@@ -242,10 +244,124 @@ class ViewController: UIViewController, ARSKViewDelegate, SceneDelegate {
         let param = FoodParam(food: identifier)
         repository.search(param: param).subscribe(onNext: { food in
             self.food = food
+            self.data = food.restaurants
+            self.buyCollectionView.reloadData()
             self.arViewType = .resultDisplayed
         }, onError: { error in
             self.arViewType = .failedToGetResults
         }).addDisposableTo(disposeBag)
+    }
+    
+    // MARK - Collection View
+    
+    let kScrollOffset: CGFloat = 0.3
+    let kCellMargin: CGFloat = 0.0
+    var kAccountDetailCellScreenOccupancy: CGFloat = 1.0
+    var kCellSize: CGSize?
+    var data:[Restaurant]?
+    var selectedIndexPath: IndexPath?
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setCellSize()
+    }
+    
+    func setCellSize() {
+        let screenSize = UIScreen.main.bounds.size
+        let width = screenSize.width //* kAccountDetailCellScreenOccupancy
+        //        let widthLimit: CGFloat = 375
+        //        if width > widthLimit {
+        //            width = widthLimit
+        //            //kAccountDetailCellScreenOccupancy = widthLimit/screenSize.width
+        //        }
+        let itemSize = CGSize(width: width, height: 126.0)
+        kCellSize = itemSize
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return data?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cellId = "merchantCell"
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MerchantCollectionViewCell
+        cell.set(restaurant: data![indexPath.row])
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let screenWidth = UIScreen.main.bounds.width
+        let margin = screenWidth * (1 - kAccountDetailCellScreenOccupancy)
+        return UIEdgeInsets(top: 0, left: margin/2.0, bottom: 0, right: margin/2.0)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return kCellMargin
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return kCellMargin
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let restaurant = data![indexPath.row]
+        if !restaurant.isProntoMerchant {
+            if let link = URL(string: restaurant.url) {
+                UIApplication.shared.open(link)
+            }
+        } else {
+            // open another page
+        }
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        targetContentOffset.pointee.x = scrollView.contentOffset.x
+        
+        //check if scrolled is 30% of the screen, snap to next/prev cell
+//        let actualPosition = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
+//        if (actualPosition.x >= UIScreen.main.bounds.size.width * kScrollOffset){
+//            if((selectedIndexPath?.row)!>0) { snapToIndex(index: (selectedIndexPath?.row)! - 1)
+//                scrollView.isScrollEnabled = false}
+//        }else if (actualPosition.x <= UIScreen.main.bounds.size.width * -kScrollOffset){
+//            if((selectedIndexPath?.row)!<(data?.count)!-1) { snapToIndex(index: (selectedIndexPath?.row)! + 1)
+//                scrollView.isScrollEnabled = false}
+//        }else{
+//            snapToIndex()
+//        }
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        scrollView.isScrollEnabled = true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return kCellSize!
+    }
+    
+    func snapToIndex(index: Int? = nil) {
+        let index = index ?? getNearestIndex()
+        let indexPath = IndexPath(item: index, section: 0)
+        buyCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        selectedIndexPath = indexPath
+    }
+    
+    func getNearestIndex() -> Int {
+        let cellWidth = kCellSize!.width
+        for i in 0..<buyCollectionView.numberOfItems(inSection: 0) {
+            let limit = CGFloat(i) * cellWidth + cellWidth / 2.0 + kCellMargin * CGFloat(i)
+            if buyCollectionView.contentOffset.x <= limit{
+                return i
+            }
+        }
+        return 0
     }
     
 }

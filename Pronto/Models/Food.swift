@@ -53,6 +53,8 @@ class Restaurant: Mappable {
     var image: String!
     var name: String!
     var url: String!
+    var isProntoMerchant: Bool!
+    var products: [Product]!
     
     required init?(map: Map) {
     }
@@ -63,6 +65,8 @@ class Restaurant: Mappable {
         image <- map["image"]
         name <- map["name"]
         url <- map["url"]
+        isProntoMerchant <- map["is_pronto_merchant"]
+        products <- map["products"]
     }
     
 }
@@ -80,6 +84,27 @@ class Review: Mappable {
         body <- map["body"]
         rating <- map["rating"]
         title <- map["title"]
+    }
+    
+}
+
+class Product: Mappable {
+    
+    var description: String!
+    var id: Int!
+    var name: String!
+    var price: String!
+    var sku: String!
+    
+    required init?(map: Map) {
+    }
+    
+    func mapping(map: Map) {
+        description <- map["description"]
+        id <- map["id"]
+        name <- map["name"]
+        price <- map["price"]
+        sku <- map["sku"]
     }
     
 }
