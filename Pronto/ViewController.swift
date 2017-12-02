@@ -32,6 +32,9 @@ class ViewController: UIViewController, ARSKViewDelegate {
     @IBOutlet weak var instructionsLabel: UILabel!
     @IBOutlet weak var instructionsViewBottomConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var productDetailsView: UIView!
+    @IBOutlet weak var foodLabel: UILabel!
+    
     @IBAction func didTapRecognize(_ sender: Any) {
         arViewType = .resultDisplayed // temp
     }
@@ -159,21 +162,25 @@ class ViewController: UIViewController, ARSKViewDelegate {
     }
     
     func getCaptionNode(title: String, description: String) -> SKNode {
-        let labelBoxNode = SKSpriteNode(color: .darkGray, size: CGSize(width: 200, height: 200))
-        labelBoxNode.position = CGPoint(x: 0, y: 0)
+        foodLabel.text = "Mom's Spaghetttiiii"
+        let texture = SKTexture(image: getImage(view: productDetailsView))
+        return SKSpriteNode(texture: texture)
+    }
+    
+    func getImage(view: UIView) -> UIImage {
+        let bounds = view.bounds
+        let bg = view.backgroundColor
         
-        let singleLineMessage = SKLabelNode()
-        singleLineMessage.fontSize = min(labelBoxNode.size.width, labelBoxNode.size.height) /
-            CGFloat(description.components(separatedBy: "\n").count)
-        singleLineMessage.verticalAlignmentMode = .center
-        singleLineMessage.text = description
-        let message = singleLineMessage.multilined()
-        message.position = CGPoint(x: 0, y: 0)
-        message.zPosition = 1001
+        view.backgroundColor = UIColor.white
         
-        labelBoxNode.addChild(message)
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, true, 0)
         
-        return labelBoxNode
+        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        view.bounds = bounds
+        view.backgroundColor = bg
+        return image!
     }
     
     // MARK: - ARSKViewDelegate
