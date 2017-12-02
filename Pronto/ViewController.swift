@@ -14,6 +14,20 @@ class ViewController: UIViewController, ARSKViewDelegate {
     
     @IBOutlet var sceneView: ARSKView!
     
+    @IBOutlet weak var markerView: UIView!
+    
+    @IBOutlet weak var buyView: UIView!
+    @IBOutlet weak var buyCollectionView: UICollectionView!
+    @IBOutlet weak var buyViewBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var instructionsView: UIView!
+    @IBOutlet weak var instructionsLabel: UILabel!
+    @IBOutlet weak var instructionsViewBottomConstraint: NSLayoutConstraint!
+    
+    @IBAction func didTapRecognize(_ sender: Any) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
