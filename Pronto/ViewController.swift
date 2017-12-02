@@ -34,6 +34,7 @@ class ViewController: UIViewController, ARSKViewDelegate {
     
     @IBOutlet weak var productDetailsView: UIView!
     @IBOutlet weak var foodLabel: UILabel!
+    @IBOutlet weak var nutritionFactsLabel: UILabel!
     
     @IBAction func didTapRecognize(_ sender: Any) {
         arViewType = .resultDisplayed // temp

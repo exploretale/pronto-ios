@@ -135,15 +135,33 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fPT-uY-rb5" userLabel="Product Detail View">
-                                <rect key="frame" x="0.0" y="-30.5" width="375" height="30.5"/>
+                                <rect key="frame" x="0.0" y="-120" width="375" height="120"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Zgv-2e-VfD">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="30.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BAb-Yg-VCe">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="30.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HCh-bm-zoy">
+                                                        <rect key="frame" x="24" y="16" width="327" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="HCh-bm-zoy" firstAttribute="top" secondItem="BAb-Yg-VCe" secondAttribute="top" constant="16" id="6HU-Pf-c7K"/>
+                                                    <constraint firstAttribute="bottom" secondItem="HCh-bm-zoy" secondAttribute="bottom" id="iQB-zT-94x"/>
+                                                    <constraint firstItem="HCh-bm-zoy" firstAttribute="leading" secondItem="BAb-Yg-VCe" secondAttribute="leading" constant="24" id="jjw-CA-pK8"/>
+                                                    <constraint firstAttribute="trailing" secondItem="HCh-bm-zoy" secondAttribute="trailing" constant="24" id="n9M-fy-hQf"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANI-6M-asj">
+                                                <rect key="frame" x="0.0" y="30.5" width="375" height="30.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Nutrition Facts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GiF-29-OgW">
                                                         <rect key="frame" x="8" y="8" width="359" height="14.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                         <nil key="textColor"/>
@@ -152,10 +170,28 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="HCh-bm-zoy" firstAttribute="top" secondItem="BAb-Yg-VCe" secondAttribute="top" constant="8" id="6HU-Pf-c7K"/>
-                                                    <constraint firstAttribute="bottom" secondItem="HCh-bm-zoy" secondAttribute="bottom" constant="8" id="iQB-zT-94x"/>
-                                                    <constraint firstItem="HCh-bm-zoy" firstAttribute="leading" secondItem="BAb-Yg-VCe" secondAttribute="leading" constant="8" id="jjw-CA-pK8"/>
-                                                    <constraint firstAttribute="trailing" secondItem="HCh-bm-zoy" secondAttribute="trailing" constant="8" id="n9M-fy-hQf"/>
+                                                    <constraint firstAttribute="trailing" secondItem="GiF-29-OgW" secondAttribute="trailing" constant="8" id="Dqi-OI-boD"/>
+                                                    <constraint firstAttribute="bottom" secondItem="GiF-29-OgW" secondAttribute="bottom" constant="8" id="E3w-Ky-IyQ"/>
+                                                    <constraint firstItem="GiF-29-OgW" firstAttribute="top" secondItem="ANI-6M-asj" secondAttribute="top" constant="8" id="Jqs-0F-bd3"/>
+                                                    <constraint firstItem="GiF-29-OgW" firstAttribute="leading" secondItem="ANI-6M-asj" secondAttribute="leading" constant="8" id="uPp-A1-0Vz"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1I4-MF-c8e">
+                                                <rect key="frame" x="0.0" y="61" width="375" height="59"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Sodium 123mg Sodium 123mg Sodium 123mg" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRR-3j-V0r">
+                                                        <rect key="frame" x="24" y="0.0" width="327" height="43"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="pRR-3j-V0r" firstAttribute="top" secondItem="1I4-MF-c8e" secondAttribute="top" id="GKZ-hr-vTb"/>
+                                                    <constraint firstItem="pRR-3j-V0r" firstAttribute="leading" secondItem="1I4-MF-c8e" secondAttribute="leading" constant="24" id="Gix-C2-anz"/>
+                                                    <constraint firstAttribute="trailing" secondItem="pRR-3j-V0r" secondAttribute="trailing" constant="24" id="Wm9-ZZ-UP9"/>
+                                                    <constraint firstAttribute="bottom" secondItem="pRR-3j-V0r" secondAttribute="bottom" constant="16" id="whR-xC-Cbd"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -206,6 +242,7 @@
                         <outlet property="instructionsView" destination="wlR-PD-nhe" id="9Hx-Cr-eam"/>
                         <outlet property="instructionsViewBottomConstraint" destination="O49-P4-850" id="pd2-Cx-dRy"/>
                         <outlet property="markerView" destination="s6H-3P-tWW" id="ezF-Z3-2jP"/>
+                        <outlet property="nutritionFactsLabel" destination="pRR-3j-V0r" id="WKL-R3-LxW"/>
                         <outlet property="productDetailsView" destination="fPT-uY-rb5" id="Edo-Bs-2fc"/>
                         <outlet property="resetButton" destination="IQX-in-KCp" id="yqg-Ee-L5o"/>
                         <outlet property="sceneView" destination="sgm-Ta-bEi" id="Qdk-Gd-C7h"/>
