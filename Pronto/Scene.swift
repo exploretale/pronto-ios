@@ -8,10 +8,17 @@
 
 import SpriteKit
 import ARKit
+import CoreML
+import Vision
+
+protocol SceneDelegate {
+    func didDetectObject(identifier: String)
+}
 
 class Scene: SKScene {
     
     private var currentAnchor: ARAnchor?
+    var sceneDelegate: SceneDelegate?
     
     override func didMove(to view: SKView) {
         // Setup your scene here
@@ -28,22 +35,46 @@ class Scene: SKScene {
         
         // Create anchor using the camera's current position
         if let currentFrame = sceneView.session.currentFrame {
-            
-            // Create a transform with a translation of 0.2 meters in front of the camera
-            var translation = matrix_identity_float4x4
-            translation.columns.3.x = -0.5  // top
-            translation.columns.3.y = 0.5   // right
-            translation.columns.3.z = -2    // distance in front of cam, negative mas malayo
-            let transform = simd_mul(currentFrame.camera.transform, translation)
-            
-            // remove current anchor
-            removeAnchor()
-            
-            // Add a new anchor to the session
-            let anchor = ARAnchor(transform: transform)
-            self.currentAnchor = anchor
-            
-            sceneView.session.add(anchor: anchor)
+            DispatchQueue.global(qos: .background).async {
+                do {
+                    // create model
+                    let model = try VNCoreMLModel(for: Food101().model)
+                    
+                    // create request
+                    let request = VNCoreMLRequest(model: model, completionHandler: { (request, error) in
+                        // Jump onto the main thread
+                        DispatchQueue.main.async {
+                            // Access the first result in the array after casting the array as a VNClassificationObservation array
+                            guard let results = request.results as? [VNClassificationObservation],
+                                let result = results.first else {
+                                    print ("No results?")
+                                    return
+                            }
+                            
+                            // Create a transform with a translation of 0.2 meters in front of the camera
+                            var translation = matrix_identity_float4x4
+                            translation.columns.3.x = -0.5  // top
+                            translation.columns.3.y = 0.5   // right
+                            translation.columns.3.z = -2    // distance in front of cam, negative mas malayo
+                            let transform = simd_mul(currentFrame.camera.transform, translation)
+                            
+                            // remove current anchor
+                            self.removeAnchor()
+                            
+                            // Add a new anchor to the session
+                            let anchor = ARAnchor(transform: transform)
+                            self.currentAnchor = anchor
+                            
+                            sceneView.session.add(anchor: anchor)
+                            self.sceneDelegate?.didDetectObject(identifier: result.identifier)
+                        }
+                    })
+                    
+                    // create a handler
+                    let handler = VNImageRequestHandler(cvPixelBuffer: currentFrame.capturedImage, options: [:])
+                    try handler.perform([request])
+                } catch {}
+            }
         }
     }
     

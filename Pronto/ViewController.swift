@@ -11,10 +11,10 @@ import SpriteKit
 import ARKit
 
 enum ARViewType {
-    case waitingForUserTap, waitingForResults, failedToGetResuls, resultDisplayed
+    case waitingForUserTap, waitingForResults(identifier: String), failedToGetResuls, resultDisplayed
 }
 
-class ViewController: UIViewController, ARSKViewDelegate {
+class ViewController: UIViewController, ARSKViewDelegate, SceneDelegate {
     
     @IBOutlet var sceneView: ARSKView!
     
@@ -46,6 +46,8 @@ class ViewController: UIViewController, ARSKViewDelegate {
             scene.removeAnchor()
         }
     }
+    
+    var food: Food?
     
     var arViewType: ARViewType = ARViewType.waitingForUserTap {
         didSet {
@@ -101,6 +103,9 @@ class ViewController: UIViewController, ARSKViewDelegate {
         // Load the SKScene from 'Scene.sks'
         if let scene = SKScene(fileNamed: "Scene") {
             sceneView.presentScene(scene)
+        }
+        if let scene = sceneView.scene as? Scene {
+            scene.sceneDelegate = self
         }
         
         self.arViewType = .waitingForUserTap
@@ -187,6 +192,10 @@ class ViewController: UIViewController, ARSKViewDelegate {
     // MARK: - ARSKViewDelegate
     
     func view(_ view: ARSKView, nodeFor anchor: ARAnchor) -> SKNode? {
+        guard let food = self.food else {
+            return nil
+        }
+        
         // Create and configure a node for the anchor added to the view's session.
         return getCaptionNode(title: "Hello", description: "hot dogs\ncold beer\nteam jerseys")
     }
@@ -205,4 +214,11 @@ class ViewController: UIViewController, ARSKViewDelegate {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
     }
+    
+    // MARK: SceneDelegate
+    
+    func didDetectObject(identifier: String) {
+        arViewType = .waitingForResults(identifier: identifier)
+    }
+    
 }
