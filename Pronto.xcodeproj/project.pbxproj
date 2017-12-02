@@ -10,7 +10,10 @@
 		5956981CF1318E11A1872260 /* Pods_Pronto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3B63497B87BBE5764468041 /* Pods_Pronto.framework */; };
 		A21150881FD28D7F00185DAA /* SKLabelNode+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21150871FD28D7F00185DAA /* SKLabelNode+.swift */; };
 		A211508F1FD2C23E00185DAA /* Food101.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A211508E1FD2C23E00185DAA /* Food101.mlmodel */; };
-		A21150921FD2C46500185DAA /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21150911FD2C46500185DAA /* Food.swift */; };
+		A21150951FD2E0C800185DAA /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21150941FD2E0C800185DAA /* ApiService.swift */; };
+		A21150981FD2E37300185DAA /* FoodParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21150971FD2E37300185DAA /* FoodParam.swift */; };
+		A211509B1FD2E4AD00185DAA /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A211509A1FD2E4AD00185DAA /* Repository.swift */; };
+		A2D3CD861FD2F38400D704FD /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D3CD851FD2F38400D704FD /* Food.swift */; };
 		A2D96E0C1FD25897000CCF79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D96E0B1FD25897000CCF79 /* AppDelegate.swift */; };
 		A2D96E0E1FD25897000CCF79 /* Scene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2D96E0D1FD25897000CCF79 /* Scene.sks */; };
 		A2D96E101FD25897000CCF79 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D96E0F1FD25897000CCF79 /* Scene.swift */; };
@@ -26,7 +29,10 @@
 		9397DB1E9EC4C16FD4D4A1A3 /* Pods-Pronto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pronto.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pronto/Pods-Pronto.release.xcconfig"; sourceTree = "<group>"; };
 		A21150871FD28D7F00185DAA /* SKLabelNode+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKLabelNode+.swift"; sourceTree = "<group>"; };
 		A211508E1FD2C23E00185DAA /* Food101.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Food101.mlmodel; sourceTree = "<group>"; };
-		A21150911FD2C46500185DAA /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
+		A21150941FD2E0C800185DAA /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		A21150971FD2E37300185DAA /* FoodParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodParam.swift; sourceTree = "<group>"; };
+		A211509A1FD2E4AD00185DAA /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		A2D3CD851FD2F38400D704FD /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Food.swift; path = Pronto/Data/Param/Food.swift; sourceTree = SOURCE_ROOT; };
 		A2D96E081FD25897000CCF79 /* Pronto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pronto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2D96E0B1FD25897000CCF79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2D96E0D1FD25897000CCF79 /* Scene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene.sks; sourceTree = "<group>"; };
@@ -72,9 +78,27 @@
 		A21150901FD2C45000185DAA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A21150911FD2C46500185DAA /* Food.swift */,
+				A2D3CD851FD2F38400D704FD /* Food.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		A21150931FD2E09300185DAA /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				A21150941FD2E0C800185DAA /* ApiService.swift */,
+				A211509A1FD2E4AD00185DAA /* Repository.swift */,
+				A21150961FD2E36900185DAA /* Param */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		A21150961FD2E36900185DAA /* Param */ = {
+			isa = PBXGroup;
+			children = (
+				A21150971FD2E37300185DAA /* FoodParam.swift */,
+			);
+			path = Param;
 			sourceTree = "<group>";
 		};
 		A2D96DFF1FD25897000CCF79 = {
@@ -98,17 +122,18 @@
 		A2D96E0A1FD25897000CCF79 /* Pronto */ = {
 			isa = PBXGroup;
 			children = (
-				A21150901FD2C45000185DAA /* Models */,
 				A211508E1FD2C23E00185DAA /* Food101.mlmodel */,
-				A2D96E211FD25D97000CCF79 /* Extensions */,
-				A2D96E0B1FD25897000CCF79 /* AppDelegate.swift */,
+				A2D96E1B1FD25897000CCF79 /* Info.plist */,
 				A2D96E0D1FD25897000CCF79 /* Scene.sks */,
+				A2D96E0B1FD25897000CCF79 /* AppDelegate.swift */,
 				A2D96E0F1FD25897000CCF79 /* Scene.swift */,
 				A2D96E111FD25897000CCF79 /* ViewController.swift */,
-				A2D96E131FD25897000CCF79 /* Main.storyboard */,
 				A2D96E161FD25897000CCF79 /* Assets.xcassets */,
+				A21150931FD2E09300185DAA /* Data */,
+				A2D96E211FD25D97000CCF79 /* Extensions */,
 				A2D96E181FD25897000CCF79 /* LaunchScreen.storyboard */,
-				A2D96E1B1FD25897000CCF79 /* Info.plist */,
+				A2D96E131FD25897000CCF79 /* Main.storyboard */,
+				A21150901FD2C45000185DAA /* Models */,
 			);
 			path = Pronto;
 			sourceTree = "<group>";
@@ -233,9 +258,24 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Pronto/Pods-Pronto-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya-ObjectMapper/Moya_ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya_ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -249,12 +289,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A21150921FD2C46500185DAA /* Food.swift in Sources */,
 				A2D96E231FD25DAB000CCF79 /* UIView+Designable.swift in Sources */,
 				A21150881FD28D7F00185DAA /* SKLabelNode+.swift in Sources */,
 				A2D96E121FD25897000CCF79 /* ViewController.swift in Sources */,
 				A211508F1FD2C23E00185DAA /* Food101.mlmodel in Sources */,
+				A21150981FD2E37300185DAA /* FoodParam.swift in Sources */,
 				A2D96E101FD25897000CCF79 /* Scene.swift in Sources */,
+				A211509B1FD2E4AD00185DAA /* Repository.swift in Sources */,
+				A2D3CD861FD2F38400D704FD /* Food.swift in Sources */,
+				A21150951FD2E0C800185DAA /* ApiService.swift in Sources */,
 				A2D96E0C1FD25897000CCF79 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,7 +442,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.whitecloak.ios.Pronto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -415,7 +458,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.whitecloak.ios.Pronto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
