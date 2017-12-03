@@ -14,7 +14,7 @@ class Food: Mappable {
     var name: String!
     var nutrients: [Nutrient]!
     var restaurants: [Restaurant]!
-    var reviews: [Review]!
+    var reviews: [Review]?
     
     required init?(map: Map) {
     }

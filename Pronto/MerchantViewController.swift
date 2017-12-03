@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import MBProgressHUD
 
 class MerchantViewController: UIViewController {
 
@@ -21,6 +22,7 @@ class MerchantViewController: UIViewController {
     }
     
     var repository: Repository! = Repository.instance
+    var food: Food!
     var restaurant: Restaurant!
     let disposeBag = DisposeBag()
     
@@ -32,6 +34,12 @@ class MerchantViewController: UIViewController {
         
         productsCollectionView.delegate = self
         productsCollectionView.dataSource = self
+        
+        reviewsTableView.delegate = self
+        reviewsTableView.dataSource = self
+        reviewsTableView.rowHeight = UITableViewAutomaticDimension
+        reviewsTableView.estimatedRowHeight = 200
+        reviewsTableView.tableFooterView = UIView()
     }
 
 }
@@ -54,16 +62,35 @@ extension MerchantViewController: UICollectionViewDataSource, UICollectionViewDe
         let product = restaurant.products[indexPath.row]
         let param = CheckoutParam(restaurant: restaurant, product: product)
         
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         repository.checkout(param: param).subscribe(onNext: { (checkoutResp) in
+            MBProgressHUD.hide(for: self.view, animated: true)
             if let link = URL(string: checkoutResp.checkoutUrl) {
                 UIApplication.shared.open(link)
             }
         }, onError: { _ in
+            MBProgressHUD.hide(for: self.view, animated: true)
             let alert = UIAlertController(title: "Error", message: "Failed to place order", preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(action)
             self.present(alert, animated: true, completion: nil)
         }).addDisposableTo(disposeBag)
+    }
+    
+}
+
+extension MerchantViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let review = food.reviews![indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "review", for: indexPath)
+            as! ReviewTableViewCell
+        cell.set(review: review)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return food.reviews?.count ?? 0
     }
     
 }

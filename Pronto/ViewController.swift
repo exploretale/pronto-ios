@@ -209,8 +209,9 @@ class ViewController: UIViewController, ARSKViewDelegate, SceneDelegate, UIColle
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "details", let vc = segue.destination as? MerchantViewController,
-            let restaurant = sender as? Restaurant {
+            let (restaurant, food) = sender as? (Restaurant, Food) {
             vc.restaurant = restaurant
+            vc.food = food
         }
     }
     
@@ -321,7 +322,7 @@ class ViewController: UIViewController, ARSKViewDelegate, SceneDelegate, UIColle
                 UIApplication.shared.open(link)
             }
         } else {
-            performSegue(withIdentifier: "details", sender: restaurant)
+            performSegue(withIdentifier: "details", sender: (restaurant, food))
         }
     }
     
