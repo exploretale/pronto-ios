@@ -33,6 +33,7 @@ class ApiService: RxMoyaProvider<Service> {
 
 enum Service {
     
+    case checkout(param: CheckoutParam)
     case search(param: FoodParam)
     
 }
@@ -41,7 +42,7 @@ extension Service: TargetType {
     
     static func getBaseUrl() -> String {
         //128.199.217.76
-        let urlString = "http://128.199.217.76/py/pronto-py/api/"
+        let urlString = "http://earthmaniebo.com/"
         return urlString
     }
     
@@ -53,14 +54,16 @@ extension Service: TargetType {
     var path: String {
         switch self {
         case .search:
-            return "search"
+            return "py/pronto-py/api/search"
+        case .checkout:
+            return "api/orders"
         }
     }
     
     var method: Moya.Method {
         switch self {
-//        case .login:
-//            return .post
+        case .checkout:
+            return .post
         default:
             return .get
         }
@@ -68,6 +71,8 @@ extension Service: TargetType {
     
     var parameters: [String: Any]? {
         switch self {
+        case .checkout(let param):
+            return param.toJSON()
         case .search(let param):
             return param.toJSON()
             //        case .jsonArrayParam(let param):

@@ -50,6 +50,7 @@ class Restaurant: Mappable {
     
     var address: String!
     var id: String!
+    var merchantId: String!
     var image: String!
     var name: String!
     var url: String!
@@ -63,6 +64,7 @@ class Restaurant: Mappable {
     func mapping(map: Map) {
         address <- map["address"]
         id <- map["id"]
+        merchantId <- map["merchant_id"]
         image <- map["image"]
         name <- map["name"]
         url <- map["url"]

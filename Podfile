@@ -16,5 +16,7 @@ target 'Pronto' do
   
   # Pod for OneSignal
   pod 'OneSignal', '>= 2.5.2', '< 3.0'
+  
+  pod 'MBProgressHUD', '~> 1.0.0'
 
 end

@@ -20,6 +20,12 @@ class Repository {
         self.service = ApiService.instance
     }
     
+    func checkout(param: CheckoutParam) -> Observable<CheckoutResp> {
+        return service
+            .request(.checkout(param: param))
+            .mapObject(CheckoutResp.self)
+    }
+    
     func search(param: FoodParam) -> Observable<Food> {
         return service
             .request(.search(param: param))

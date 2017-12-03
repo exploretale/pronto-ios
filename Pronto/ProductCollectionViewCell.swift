@@ -16,7 +16,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     
     func set(product: Product) {
         nameLabel.text = product.name
-        priceLabel.text = product.price
+        priceLabel.text = "PHP " + product.price
         if let img = product.image, let url = URL(string: img) {
             productImageView.kf.setImage(with: url)
         } else {

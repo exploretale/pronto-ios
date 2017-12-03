@@ -17,6 +17,8 @@
 		A22639381FD36C37006B1891 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22639371FD36C37006B1891 /* ReviewTableViewCell.swift */; };
 		A226393A1FD36FA6006B1891 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22639391FD36FA6006B1891 /* ProductCollectionViewCell.swift */; };
 		A226393D1FD370DE006B1891 /* MerchantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226393C1FD370DE006B1891 /* MerchantViewController.swift */; };
+		A226393F1FD37849006B1891 /* CheckoutParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226393E1FD37849006B1891 /* CheckoutParam.swift */; };
+		A22639411FD37902006B1891 /* CheckoutResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22639401FD37902006B1891 /* CheckoutResp.swift */; };
 		A2D3CD891FD317D800D704FD /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D3CD881FD317D800D704FD /* Food.swift */; };
 		A2D96E0C1FD25897000CCF79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D96E0B1FD25897000CCF79 /* AppDelegate.swift */; };
 		A2D96E0E1FD25897000CCF79 /* Scene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2D96E0D1FD25897000CCF79 /* Scene.sks */; };
@@ -40,6 +42,8 @@
 		A22639371FD36C37006B1891 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		A22639391FD36FA6006B1891 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		A226393C1FD370DE006B1891 /* MerchantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantViewController.swift; sourceTree = "<group>"; };
+		A226393E1FD37849006B1891 /* CheckoutParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutParam.swift; sourceTree = "<group>"; };
+		A22639401FD37902006B1891 /* CheckoutResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutResp.swift; sourceTree = "<group>"; };
 		A2D3CD881FD317D800D704FD /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		A2D96E081FD25897000CCF79 /* Pronto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pronto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2D96E0B1FD25897000CCF79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +84,7 @@
 				A21150941FD2E0C800185DAA /* ApiService.swift */,
 				A211509A1FD2E4AD00185DAA /* Repository.swift */,
 				A21150961FD2E36900185DAA /* Param */,
+				A22639401FD37902006B1891 /* CheckoutResp.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -88,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				A21150971FD2E37300185DAA /* FoodParam.swift */,
+				A226393E1FD37849006B1891 /* CheckoutParam.swift */,
 			);
 			path = Param;
 			sourceTree = "<group>";
@@ -255,6 +261,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Pronto/Pods-Pronto-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya-ObjectMapper/Moya_ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
@@ -265,6 +272,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya_ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
@@ -308,11 +316,13 @@
 				A2D96E121FD25897000CCF79 /* ViewController.swift in Sources */,
 				A211508F1FD2C23E00185DAA /* Food101.mlmodel in Sources */,
 				A226393D1FD370DE006B1891 /* MerchantViewController.swift in Sources */,
+				A226393F1FD37849006B1891 /* CheckoutParam.swift in Sources */,
 				A226393A1FD36FA6006B1891 /* ProductCollectionViewCell.swift in Sources */,
 				A21150981FD2E37300185DAA /* FoodParam.swift in Sources */,
 				A2D96E101FD25897000CCF79 /* Scene.swift in Sources */,
 				A211509B1FD2E4AD00185DAA /* Repository.swift in Sources */,
 				A2D3CD891FD317D800D704FD /* Food.swift in Sources */,
+				A22639411FD37902006B1891 /* CheckoutResp.swift in Sources */,
 				A21150951FD2E0C800185DAA /* ApiService.swift in Sources */,
 				A2D96E0C1FD25897000CCF79 /* AppDelegate.swift in Sources */,
 			);
